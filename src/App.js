@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Navbar } from './components/Navbar';
+import { Home } from './views/Home';
+import { About } from './views/About';
+import { Upload } from './views/Upload';
+import { Recognize } from './views/Recognize';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path={'/'} render={(props) => <Home {...props} />} />
+          <Route
+            exact
+            path={'/about'}
+            render={(props) => <About {...props} />}
+          />
+          <Route
+            exact
+            path={'/upload'}
+            render={(props) => <Upload {...props} />}
+          />
+          <Route
+            exact
+            path={'/recognize'}
+            render={(props) => <Recognize {...props} />}
+          />
+        </Switch>
+      </Router>
+    </React.Fragment>
   );
 }
 
