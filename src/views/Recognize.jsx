@@ -1,5 +1,6 @@
 import React from 'react';
 
-export function Recognize() {
+const Recognize = () => {
   return <h1>Recognize</h1>;
-}
+};
+export default Recognize;

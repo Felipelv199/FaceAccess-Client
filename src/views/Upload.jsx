@@ -1,5 +1,7 @@
 import React from 'react';
 
-export function Upload() {
+const Upload = () => {
   return <h1>Upload</h1>;
-}
+};
+
+export default Upload;
