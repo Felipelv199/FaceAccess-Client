@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   link: {
-    color: '#fff',
+    color: theme.palette.text.main,
     textDecoration: 'none',
   },
 }));
@@ -32,13 +32,6 @@ const Navbar = () => {
               <Typography variant="h6">Face Access</Typography>
             </Link>
           </div>
-          <Button
-            variant="text"
-            color="inherit"
-            onClick={() => history.push(home)}
-          >
-            Home
-          </Button>
           <Button
             variant="text"
             color="inherit"
