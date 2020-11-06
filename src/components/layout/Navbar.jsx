@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.main,
     textDecoration: 'none',
   },
+  button: {
+    color: theme.palette.text.main,
+  },
 }));
 
 const Navbar = () => {
@@ -34,22 +37,22 @@ const Navbar = () => {
           </div>
           <Button
             variant="text"
-            color="inherit"
             onClick={() => history.push(about)}
+            className={classes.button}
           >
             About
           </Button>
           <Button
             variant="text"
-            color="inherit"
             onClick={() => history.push(upload)}
+            className={classes.button}
           >
             Upload
           </Button>
           <Button
             variant="text"
-            color="inherit"
             onClick={() => history.push(recognize)}
+            className={classes.button}
           >
             Recognize
           </Button>

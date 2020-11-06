@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     color: theme.palette.text.main,
-    textDecoration: 'none',
   },
 }));
 
