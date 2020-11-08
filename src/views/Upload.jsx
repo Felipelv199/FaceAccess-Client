@@ -1,7 +1,8 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 const Upload = () => {
-  return <h1>Upload</h1>;
+  return <Typography variant={'h3'}>Upload</Typography>;
 };
 
 export default Upload;

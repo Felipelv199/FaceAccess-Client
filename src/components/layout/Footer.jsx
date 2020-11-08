@@ -26,20 +26,17 @@ const Footer = () => {
       className={classes.footer}
     >
       <Grid item>
-        <Button className={classes.button} onClick={() => history.push(about)}>
+        <Button color={'secondary'} onClick={() => history.push(about)}>
           About
         </Button>
       </Grid>
       <Grid item>
-        <Button className={classes.button} onClick={() => history.push(upload)}>
+        <Button color={'secondary'} onClick={() => history.push(upload)}>
           Upload
         </Button>
       </Grid>
       <Grid item>
-        <Button
-          className={classes.button}
-          onClick={() => history.push(recognize)}
-        >
+        <Button color={'secondary'} onClick={() => history.push(recognize)}>
           Recognize
         </Button>
       </Grid>
