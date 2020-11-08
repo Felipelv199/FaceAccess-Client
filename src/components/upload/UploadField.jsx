@@ -13,7 +13,7 @@ import { recognize } from '../../routes/routes.json';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    height: '100vh',
+    height: '100%',
   },
   paper: { width: '100%', padding: theme.spacing(2) },
   button: { marginTop: theme.spacing(2) },
@@ -39,13 +39,17 @@ function UploadField() {
       setImage({ url, file });
     }
   };
+  const uploadImage = (e) => {
+    e.preventDefault();
+    history.push(recognize);
+  };
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className={classes.container}>
       <Grid
         container
-        className={classes.container}
         justify="center"
         alignContent="center"
+        className={classes.container}
       >
         <Paper className={classes.paper}>
           <Grid container justify="center" alignContent="center">
@@ -97,7 +101,7 @@ function UploadField() {
               variant="contained"
               color="secondary"
               className={classes.button}
-              onClick={() => history.push(recognize)}
+              onClick={uploadImage}
             >
               Reconocer
             </Button>

@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
-  main: { minHeight: '100vh', backgroundColor: '#f2f2f2' },
+  main: { height: '100vh', backgroundColor: '#f2f2f2' },
   offset: theme.mixins.toolbar,
 }));
 

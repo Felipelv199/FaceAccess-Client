@@ -34,7 +34,7 @@ const Hero = () => {
             Face Access
           </Typography>
           <Typography variant="h4" align="center">
-            Sube una foto tuya y diviertete.
+            Sube una foto y diviertete.
           </Typography>
         </Grid>
         <Grid
