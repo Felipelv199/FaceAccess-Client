@@ -1,8 +1,9 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
+import UploadField from '../components/upload/UploadField';
 
 const Upload = () => {
-  return <Typography variant={'h3'}>Upload</Typography>;
+  return <UploadField />;
 };
 
 export default Upload;
