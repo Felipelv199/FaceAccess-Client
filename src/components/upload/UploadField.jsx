@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
-import { Typography, Grid, Paper, TextField, Button } from '@material-ui/core';
+import { useHistory } from 'react-router';
+import {
+  Typography,
+  Grid,
+  Paper,
+  TextField,
+  Button,
+  Container,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { recognize } from '../../routes/routes.json';
 
 const useStyles = makeStyles((theme) => ({
-  conatiner: {
+  container: {
     height: '100vh',
   },
-  paper: { padding: theme.spacing(5) },
-  imageField: {
-    border: '',
+  paper: { width: '100%', padding: theme.spacing(2) },
+  button: { marginTop: theme.spacing(2) },
+  boxPaper: {
+    width: '300px',
+    height: '300px',
+  },
+  imageContainer: {
+    height: '100%',
   },
 }));
 
 function UploadField() {
   const classes = useStyles();
+  const history = useHistory();
   const [image, setImage] = useState({ url: '', file: '' });
   const getImage = (e) => {
     e.preventDefault();
@@ -25,38 +40,71 @@ function UploadField() {
     }
   };
   return (
-    <Grid
-      container
-      alignItems="center"
-      justify="center"
-      className={classes.conatiner}
-    >
-      <Paper className={classes.paper}>
-        <Grid container justify="center" alignContent="center">
-          <Typography variant={'h3'}>Sube Una Fotografia</Typography>
-          <Grid item xs={12}>
-            {image.url !== '' ? (
-              <img alt="Foto" src={image.url} width="300" />
-            ) : null}
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container justify="center">
-              <TextField label="Nombre" />
+    <Container maxWidth="sm">
+      <Grid
+        container
+        className={classes.container}
+        justify="center"
+        alignContent="center"
+      >
+        <Paper className={classes.paper}>
+          <Grid container justify="center" alignItems="center">
+            <Typography variant={'h4'}>Sube Una Foto</Typography>
+            <Paper
+              variant="outlined"
+              className={image.url === '' && classes.boxPaper}
+            >
+              {image.url !== '' ? (
+                <img alt="Foto" src={image.url} width="300px" height="300px" />
+              ) : (
+                <Grid
+                  container
+                  justify="center"
+                  alignContent="center"
+                  className={classes.imageContainer}
+                >
+                  <Typography align="center">
+                    La imagen o fotgrafía que subas se mostrara aqui.
+                  </Typography>
+                </Grid>
+              )}
+            </Paper>
+            <Grid item xs={12}>
+              <Grid container justify="center">
+                <Button
+                  variant="outlined"
+                  component="label"
+                  color="secondary"
+                  className={classes.button}
+                >
+                  {image.url === '' ? 'Añadir Imagen' : 'Cambiar Imagen'}
+                  <TextField
+                    type="file"
+                    style={{ display: 'none' }}
+                    accept="image/*"
+                    capture
+                    onChange={getImage}
+                  />
+                </Button>
+              </Grid>
             </Grid>
+            <Grid item xs={12}>
+              <Grid container justify="center">
+                <TextField label="Nombre Completo" color="primary" />
+              </Grid>
+            </Grid>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              onClick={() => history.push(recognize)}
+            >
+              Reconocer
+            </Button>
           </Grid>
-          <Button variant="outlined" component="label">
-            Añadir Imagen
-            <TextField
-              type="file"
-              style={{ display: 'none' }}
-              accept="image/*"
-              capture
-              onChange={getImage}
-            />
-          </Button>
-        </Grid>
-      </Paper>
-    </Grid>
+        </Paper>
+      </Grid>
+    </Container>
   );
 }
 

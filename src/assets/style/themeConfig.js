@@ -27,7 +27,7 @@ const theme = createMuiTheme({
       fontFamily: 'Nunito, sans-serif',
     },
     h4: {
-      fontFamily: 'Montserrat, sans-serif',
+      fontFamily: 'Nunito, sans-serif',
     },
     h5: {
       fontFamily: 'Montserrat, sans-serif',

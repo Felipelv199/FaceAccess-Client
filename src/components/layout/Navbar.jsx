@@ -3,10 +3,13 @@ import { useHistory, Link } from 'react-router-dom';
 import {
   AppBar,
   Button,
+  Hidden,
+  IconButton,
   makeStyles,
   Toolbar,
   Typography,
 } from '@material-ui/core';
+import MenuList from '../layout/MenuList';
 import { about, home, recognize, upload } from '../../routes/routes.json';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,27 +34,32 @@ const Navbar = () => {
               <Typography variant="h5">Face Access</Typography>
             </Link>
           </div>
-          <Button
-            variant="text"
-            onClick={() => history.push(about)}
-            color="secondary"
-          >
-            About
-          </Button>
-          <Button
-            variant="text"
-            onClick={() => history.push(upload)}
-            color="secondary"
-          >
-            Upload
-          </Button>
-          <Button
-            variant="text"
-            onClick={() => history.push(recognize)}
-            color="secondary"
-          >
-            Recognize
-          </Button>
+          <Hidden mdDown>
+            <Button
+              variant="text"
+              onClick={() => history.push(about)}
+              color="secondary"
+            >
+              About
+            </Button>
+            <Button
+              variant="text"
+              onClick={() => history.push(upload)}
+              color="secondary"
+            >
+              Upload
+            </Button>
+            <Button
+              variant="text"
+              onClick={() => history.push(recognize)}
+              color="secondary"
+            >
+              Recognize
+            </Button>
+          </Hidden>
+          <Hidden lgUp>
+            <MenuList />
+          </Hidden>
         </Toolbar>
       </AppBar>
     </>
