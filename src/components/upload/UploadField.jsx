@@ -53,7 +53,9 @@ function UploadField() {
       >
         <Paper className={classes.paper}>
           <Grid container justify="center" alignContent="center">
-            <Typography variant={'h4'}>Sube Una Foto</Typography>
+            <Typography variant="h4" align="center">
+              Sube Una Foto
+            </Typography>
             <Paper
               variant="outlined"
               className={image.url === '' && classes.boxPaper}
