@@ -38,7 +38,6 @@ function MenuList() {
             button
             onClick={() => {
               history.push(about);
-              setDrawerDisplayed(false);
             }}
           >
             <ListItemText>About</ListItemText>
@@ -47,7 +46,6 @@ function MenuList() {
             button
             onClick={() => {
               history.push(upload);
-              setDrawerDisplayed(false);
             }}
           >
             <ListItemText>Upload</ListItemText>
@@ -56,7 +54,6 @@ function MenuList() {
             button
             onClick={() => {
               history.push(recognize);
-              setDrawerDisplayed(false);
             }}
           >
             <ListItemText>Recognize</ListItemText>

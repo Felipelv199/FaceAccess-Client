@@ -48,7 +48,7 @@ function UploadField() {
         alignContent="center"
       >
         <Paper className={classes.paper}>
-          <Grid container justify="center" alignItems="center">
+          <Grid container justify="center" alignContent="center">
             <Typography variant={'h4'}>Sube Una Foto</Typography>
             <Paper
               variant="outlined"
