@@ -4,7 +4,6 @@ import {
   AppBar,
   Button,
   Hidden,
-  IconButton,
   makeStyles,
   Toolbar,
   Typography,

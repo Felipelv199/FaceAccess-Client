@@ -35,11 +35,24 @@ function RecognizeField() {
   const getVideo = async (e) => {
     e.preventDefault();
     if (!stream) {
-      const newStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-      });
-      document.getElementById('vid').srcObject = newStream;
-      setStream(newStream);
+      navigator.getMedia =
+        navigator.getUserMedia ||
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia;
+      navigator.getMedia(
+        {
+          video: true,
+        },
+        function (newStream) {
+          document.getElementById('vid').srcObject = newStream;
+          setStream(newStream);
+        },
+
+        // errorCallback *Opcional
+        function (err) {
+          console.log('Ocurrió el siguiente error: ' + err);
+        }
+      );
     }
   };
 
