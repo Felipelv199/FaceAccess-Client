@@ -11,6 +11,8 @@ import {
 import { makeStyles } from '@material-ui/styles';
 import { recognize } from '../../routes/routes.json';
 
+const S3_BUCKET = process.env.REACT_APP_DEV_AWS_S3_BUCKET;
+
 const useStyles = makeStyles((theme) => ({
   container: {
     height: '100%',
@@ -83,7 +85,7 @@ function UploadField() {
                   color="secondary"
                   className={classes.button}
                 >
-                  {image.url === '' ? 'Añadir Imagen' : 'Cambiar Imagen'}
+                  {image.url === '' ? 'Seleccionar Imagen' : 'Cambiar Imagen'}
                   <TextField
                     type="file"
                     style={{ display: 'none' }}
@@ -105,7 +107,7 @@ function UploadField() {
               className={classes.button}
               onClick={uploadImage}
             >
-              Reconocer
+              Subir Imagen
             </Button>
           </Grid>
         </Paper>

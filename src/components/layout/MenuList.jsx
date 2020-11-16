@@ -9,7 +9,7 @@ import {
   Toolbar,
 } from '@material-ui/core';
 import { Close, Menu } from '@material-ui/icons';
-import { about, upload, recognize } from '../../routes/routes.json';
+import { about, menu } from '../../routes/routes.json';
 
 function MenuList() {
   const history = useHistory();
@@ -45,18 +45,10 @@ function MenuList() {
           <ListItem
             button
             onClick={() => {
-              history.push(upload);
+              history.push(menu);
             }}
           >
-            <ListItemText>Upload</ListItemText>
-          </ListItem>
-          <ListItem
-            button
-            onClick={() => {
-              history.push(recognize);
-            }}
-          >
-            <ListItemText>Recognize</ListItemText>
+            <ListItemText>Menu</ListItemText>
           </ListItem>
         </List>
       </Drawer>

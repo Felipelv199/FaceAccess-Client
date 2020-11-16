@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import MenuList from '../layout/MenuList';
-import { about, home, recognize, upload } from '../../routes/routes.json';
+import { about, home, menu } from '../../routes/routes.json';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -39,21 +39,14 @@ const Navbar = () => {
               onClick={() => history.push(about)}
               color="secondary"
             >
-              About
+              Sobre Nosotros
             </Button>
             <Button
               variant="text"
-              onClick={() => history.push(upload)}
+              onClick={() => history.push(menu)}
               color="secondary"
             >
-              Upload
-            </Button>
-            <Button
-              variant="text"
-              onClick={() => history.push(recognize)}
-              color="secondary"
-            >
-              Recognize
+              Menu
             </Button>
           </Hidden>
           <Hidden lgUp>

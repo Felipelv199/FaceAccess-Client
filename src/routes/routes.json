@@ -2,5 +2,6 @@
     "home" : "/",
     "about" : "/about",
     "upload" : "/upload",
-    "recognize" : "/recognize"
+    "recognize" : "/recognize",
+    "menu" : "/menu"
 }

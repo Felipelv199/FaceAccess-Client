@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
-import { upload } from '../../routes/routes.json';
+import { menu } from '../../routes/routes.json';
 
 const useStyles = makeStyles((theme) => ({
   conatiner: { height: '100vh' },
@@ -14,7 +14,7 @@ const Hero = () => {
   const history = useHistory();
   const uploadButtonHandler = (e) => {
     e.preventDefault();
-    history.push(upload);
+    history.push(menu);
   };
   return (
     <Grid
@@ -49,7 +49,7 @@ const Hero = () => {
             size="large"
             onClick={uploadButtonHandler}
           >
-            SUBE UNA IMAGEN
+            Empieza
           </Button>
         </Grid>
       </Container>

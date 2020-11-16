@@ -27,17 +27,17 @@ const Footer = () => {
     >
       <Grid item>
         <Button color={'secondary'} onClick={() => history.push(about)}>
-          About
+          Sobre Nosotros
         </Button>
       </Grid>
       <Grid item>
         <Button color={'secondary'} onClick={() => history.push(upload)}>
-          Upload
+          Subir Imagenes
         </Button>
       </Grid>
       <Grid item>
         <Button color={'secondary'} onClick={() => history.push(recognize)}>
-          Recognize
+          Reconocer
         </Button>
       </Grid>
     </Grid>
