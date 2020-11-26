@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import aws from 'aws-sdk';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Home from './views/Home';
 import About from './views/About';
@@ -10,12 +9,6 @@ import Menu from './views/Menu';
 import { about, home, recognize, upload, menu } from './routes/routes.json';
 import Layout from './components/layout/Layout';
 import theme from './assets/style/themeConfig';
-
-aws.config.update({
-  region: 'eu-west-1',
-  accessKeyId: process.env.REACT_APP_DEV_AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.REACT_APP_DEV_AWS_SECRET_ACCESS_KEY_ID,
-});
 
 function App() {
   return (

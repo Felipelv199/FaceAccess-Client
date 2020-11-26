@@ -82,6 +82,7 @@ function RecognizeField() {
       xhr.send();
       const file = new File([blob], 'frame.png');
       setImg({ url, file });
+      console.log(file);
     });
   }, []);
 
