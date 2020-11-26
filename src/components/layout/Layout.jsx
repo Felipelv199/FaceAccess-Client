@@ -6,6 +6,7 @@ import Footer from './Footer';
 const useStyles = makeStyles((theme) => ({
   main: { height: '100vh', backgroundColor: '#f2f2f2' },
   offset: theme.mixins.toolbar,
+  content: { height: '100%' },
 }));
 
 const Layout = (props) => {
@@ -16,7 +17,7 @@ const Layout = (props) => {
       <Navbar />
       <div className={classes.main}>
         <div className={classes.offset}></div>
-        {children}
+        <div className={classes.content}>{children}</div>
       </div>
       <Footer />
     </>

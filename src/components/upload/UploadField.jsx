@@ -7,10 +7,12 @@ import {
   TextField,
   Button,
   Container,
+  IconButton,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import swal from 'sweetalert';
 import { menu } from '../../routes/routes.json';
+import { ArrowBack } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -85,6 +87,11 @@ function UploadField() {
       >
         <Paper className={classes.paper}>
           <Grid container justify="center" alignContent="center">
+            <Grid item style={{ width: '100%' }}>
+              <IconButton onClick={() => history.push(menu)}>
+                <ArrowBack />
+              </IconButton>
+            </Grid>
             <Typography variant="h4" align="center">
               Sube Una Foto
             </Typography>

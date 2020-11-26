@@ -4,24 +4,27 @@ import {
   Button,
   CircularProgress,
   Container,
+  Fab,
   Grid,
+  IconButton,
   Paper,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { upload } from '../../routes/routes.json';
+import { ArrowBack, CancelPresentation } from '@material-ui/icons';
+import { upload, menu } from '../../routes/routes.json';
 
 const useStyles = makeStyles((theme) => ({
   container: { height: '100%' },
-  gridContainer: { width: '100%', height: '100%' },
-  paperContainer: { width: '80%', height: '300px' },
+  gridContainer: { height: '100%', position: 'relative' },
+  paperContainer: { width: '80%', height: '150px' },
   boxContainer: { width: '100%', height: '100%', position: 'relative' },
-  video: { width: '100%', height: '100%' },
+  video: {
+    position: 'absolute',
+    marginTop: '25%',
+  },
   uploadBox: {
     position: 'absolute',
-    width: '100%',
-    height: '100%',
-    padding: '10px',
   },
 }));
 
@@ -39,12 +42,14 @@ function RecognizeField() {
         navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||
         navigator.mozGetUserMedia;
+      console.log(document.querySelector('#vid'));
+
       navigator.getMedia(
         {
           video: true,
         },
         function (newStream) {
-          document.getElementById('vid').srcObject = newStream;
+          document.querySelector('#vid').srcObject = newStream;
           setStream(newStream);
         },
 
@@ -102,84 +107,70 @@ function RecognizeField() {
         justify="center"
         alignContent="center"
         container
-        className={classes.container}
+        className={classes.gridContainer}
       >
-        <Paper>
-          <Grid
-            container
-            justify="center"
-            alignContent="center"
-            className={classes.gridContainer}
-          >
-            <Grid item xs={12}>
+        <video id="vid" autoPlay className={classes.video}></video>
+        {stream ? (
+          <Grid item style={{ height: '100%' }}>
+            <Grid
+              container
+              justify="center"
+              alignContent="center"
+              style={{ height: '100%' }}
+            >
+              <Fab variant="extended" disabled>
+                <CircularProgress color="secondary" />
+                <Typography color="secondary">Esaneando...</Typography>
+              </Fab>
+              <Fab color="primary" onClick={cancelVideo}>
+                <CancelPresentation />
+              </Fab>
+            </Grid>
+          </Grid>
+        ) : (
+          <Paper style={{ width: '100%', padding: '25px' }}>
+            <Grid container justify="center">
+              <Grid item xs={12}>
+                <IconButton onClick={() => history.push(menu)}>
+                  <ArrowBack />
+                </IconButton>
+              </Grid>
               <Typography variant="h3" align="center">
                 Recognize
               </Typography>
-            </Grid>
-            <Paper variant="outlined" className={classes.paperContainer}>
-              <Grid
-                container
-                alignContent="center"
-                className={classes.boxContainer}
+              <Paper
+                style={{
+                  width: '100%',
+                  height: '225px',
+                  padding: '10px',
+                  marginBottom: '10px',
+                }}
               >
-                <video id="vid" autoPlay className={classes.video}></video>
                 <Grid
                   container
                   justify="center"
                   alignContent="center"
-                  className={classes.uploadBox}
+                  style={{ height: '100%' }}
                 >
-                  {stream ? (
-                    <>
-                      <CircularProgress />
-                      <Grid item xs={12}>
-                        <Typography variant="h6" color="primary" align="center">
-                          Escaneando...
-                        </Typography>
-                      </Grid>
-                    </>
-                  ) : (
-                    <>
-                      <Typography
-                        variant="body1"
-                        color="primary"
-                        align="center"
-                      >
-                        Si ya subio una foto escanee su rostro para consederle
-                        acceso o de click en el boto para subirla
-                      </Typography>
-                      <Button
-                        variant="outlined"
-                        color="secondary"
-                        onClick={() => history.push(upload)}
-                      >
-                        Sube una imagen
-                      </Button>
-                    </>
-                  )}
+                  <Typography variant="body1" color="primary" align="center">
+                    Si ya subio una foto escanee su rostro para consederle
+                    acceso o de click en el boto para subirla
+                  </Typography>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() => history.push(upload)}
+                  >
+                    Sube una imagen
+                  </Button>
                 </Grid>
-              </Grid>
-            </Paper>
-            <Grid item xs={12} style={{ marginTop: '20px', height: '50px' }}>
-              <Grid justify="center" alignContent="center" container>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={cancelVideo}
-                >
-                  Cancelar Escaneo
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={getVideo}
-                >
-                  Escanear
-                </Button>
-              </Grid>
+              </Paper>
+              <Button variant="contained" color="secondary" onClick={getVideo}>
+                Escanear
+              </Button>
             </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        )}
       </Grid>
     </Container>
   );
