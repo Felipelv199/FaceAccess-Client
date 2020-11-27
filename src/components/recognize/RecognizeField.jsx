@@ -195,7 +195,7 @@ function RecognizeField() {
           </Grid>
           <Grid item xs={12} style={{ marginBottom: '50px' }}>
             <Typography variant="h5" align="center">
-              Es tenerte verte de vuelta
+              Es bueno tenerte verte de vuelta
             </Typography>
           </Grid>
           <Avatar style={{ height: '75px', width: '75px' }} />
