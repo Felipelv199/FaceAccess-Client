@@ -17,7 +17,7 @@ import {
   ArrowBack,
   CancelPresentation,
   Check,
-  CheckCircle,
+  Close,
 } from '@material-ui/icons';
 import { upload, menu } from '../../routes/routes.json';
 
@@ -39,9 +39,10 @@ function RecognizeField() {
   const history = useHistory();
   const classes = useStyles();
   const [stream, setStream] = useState(null);
-  const [, setImg] = useState({ url: '', file: '' });
   const [, setSeconds] = useState(0);
   const [access, setAccess] = useState(false);
+  const [denied, setDenied] = useState(false);
+  const [name, setName] = useState('');
 
   const getVideo = async (e) => {
     e.preventDefault();
@@ -85,14 +86,26 @@ function RecognizeField() {
       const imageCapture = new ImageCapture(track);
       const blob = await imageCapture.takePhoto();
       const url = URL.createObjectURL(blob);
-      const file = new File([blob], 'frame.png');
-      setImg({ url, file });
-      const date = new Date().toISOString();
-      track.stop();
-      document.getElementById('vid').srcObject = null;
-      setStream(null);
-      setAccess(true);
-      console.log(date);
+      const formData = new FormData();
+      formData.append('image', blob);
+      formData.append('url', url);
+      const response = await fetch('http://localhost:8080/recognice-face', {
+        method: 'POST',
+        body: formData,
+      });
+      const responseJson = await response.json();
+      if (responseJson.name) {
+        setName(responseJson.name);
+        track.stop();
+        document.getElementById('vid').srcObject = null;
+        setStream(null);
+        setAccess(true);
+      } else {
+        track.stop();
+        document.getElementById('vid').srcObject = null;
+        setStream(null);
+        setDenied(true);
+      }
     });
   }, []);
 
@@ -201,7 +214,7 @@ function RecognizeField() {
           <Avatar style={{ height: '75px', width: '75px' }} />
           <Grid item xs={12} style={{ marginBottom: '50px' }}>
             <Typography variant="h5" align="center">
-              Sebastian Woolfolk Martinez
+              {name}
             </Typography>
           </Grid>
           <Button
@@ -215,6 +228,44 @@ function RecognizeField() {
           </Button>
         </Grid>
       </Dialog>
+      <Dialog open={denied}>
+        <Grid
+          container
+          justify="center"
+          alignContent="center"
+          style={{ padding: '30px' }}
+        >
+          <Fab
+            size="large"
+            color="primary"
+            disabled
+            style={{ marginBottom: '25px' }}
+          >
+            <Close></Close>
+          </Fab>
+          <Grid item xs={12}>
+            <Typography variant="h3" align="center">
+              Acceso Denegado
+            </Typography>
+          </Grid>
+          <Grid item xs={12} style={{ marginBottom: '50px' }}>
+            <Typography align="center">
+              No te tenemos registrado en nuestra base de datos, sube una imagen
+              y vuelve a intentarlo
+            </Typography>
+          </Grid>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              history.push(upload);
+            }}
+          >
+            Subir Imagen
+          </Button>
+        </Grid>
+      </Dialog>
+      <canvas id="2d"></canvas>
     </Container>
   );
 }
