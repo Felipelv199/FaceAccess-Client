@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
+  Avatar,
   Button,
   CircularProgress,
   Container,
+  Dialog,
   Fab,
   Grid,
   IconButton,
@@ -11,7 +13,12 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { ArrowBack, CancelPresentation } from '@material-ui/icons';
+import {
+  ArrowBack,
+  CancelPresentation,
+  Check,
+  CheckCircle,
+} from '@material-ui/icons';
 import { upload, menu } from '../../routes/routes.json';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +41,7 @@ function RecognizeField() {
   const [stream, setStream] = useState(null);
   const [, setImg] = useState({ url: '', file: '' });
   const [, setSeconds] = useState(0);
+  const [access, setAccess] = useState(false);
 
   const getVideo = async (e) => {
     e.preventDefault();
@@ -53,7 +61,6 @@ function RecognizeField() {
           setStream(newStream);
         },
 
-        // errorCallback *Opcional
         function (err) {
           console.log('Ocurrió el siguiente error: ' + err);
         }
@@ -76,18 +83,16 @@ function RecognizeField() {
   const getVideoFrame = useCallback(async (stream) => {
     stream.getTracks().map(async (track) => {
       const imageCapture = new ImageCapture(track);
-      let blob = await imageCapture.takePhoto();
+      const blob = await imageCapture.takePhoto();
       const url = URL.createObjectURL(blob);
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.responseType = 'blob';
-      xhr.onload = function () {
-        blob = xhr.response;
-      };
-      xhr.send();
       const file = new File([blob], 'frame.png');
       setImg({ url, file });
-      console.log(file);
+      const date = new Date().toISOString();
+      track.stop();
+      document.getElementById('vid').srcObject = null;
+      setStream(null);
+      setAccess(true);
+      console.log(date);
     });
   }, []);
 
@@ -139,6 +144,7 @@ function RecognizeField() {
                 Recognize
               </Typography>
               <Paper
+                variant="outlined"
                 style={{
                   width: '100%',
                   height: '225px',
@@ -172,6 +178,43 @@ function RecognizeField() {
           </Paper>
         )}
       </Grid>
+      <Dialog open={access}>
+        <Grid
+          container
+          justify="center"
+          alignContent="center"
+          style={{ padding: '30px' }}
+        >
+          <Fab size="large" color="primary" style={{ marginBottom: '25px' }}>
+            <Check></Check>
+          </Fab>
+          <Grid item xs={12}>
+            <Typography variant="h3" align="center">
+              Acceso Concedido
+            </Typography>
+          </Grid>
+          <Grid item xs={12} style={{ marginBottom: '50px' }}>
+            <Typography variant="h5" align="center">
+              Es tenerte verte de vuelta
+            </Typography>
+          </Grid>
+          <Avatar style={{ height: '75px', width: '75px' }} />
+          <Grid item xs={12} style={{ marginBottom: '50px' }}>
+            <Typography variant="h5" align="center">
+              Sebastian Woolfolk Martinez
+            </Typography>
+          </Grid>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              history.push(menu);
+            }}
+          >
+            Entrar
+          </Button>
+        </Grid>
+      </Dialog>
     </Container>
   );
 }
